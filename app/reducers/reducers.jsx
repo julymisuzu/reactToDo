@@ -1,8 +1,8 @@
-import Uuid from 'node-uuid';
-import moment from 'moment';
+var uuid = require('node-uuid');
+var moment = require('moment');
 
-export const searchTextReducer = (state = '', action) => {
-  switch (action.type) {
+export var searchTextReducer = (state = '', action) => {
+  switch(action.type) {
     case 'SET_SEARCH_TEXT':
       return action.searchText;
     default:
@@ -10,44 +10,61 @@ export const searchTextReducer = (state = '', action) => {
   };
 };
 
-export const showCompletedReducer = (state = false, action) => {
-  switch (action.type) {
+export var showCompletedReducer = (state = false, action) => {
+  switch(action.type) {
     case 'TOGGLE_SHOW_COMPLETED':
       return !state;
     default:
       return state;
-  }
+  };
 };
 
-export const todosReducer = (state = [], action) => {
-  switch (action.type) {
+export var todosReducer = (state = [], action) => {
+  switch(action.type) {
     case 'ADD_TODO':
       return [
         ...state,
-        {
-          id: Uuid(),
-          text: action.text,
-          completed: false,
-          createdAt: moment().unix(),
-          completedAt: undefined
-        }
+        action.todo
+        // {
+        //   id: uuid(),
+        //   text: action.text,
+        //   completed: false,
+        //   createdAt: moment().unix(),
+        //   completedAt: undefined
+        // }
       ];
-
-    // Add case for TOGGLE_TODO completed equal to opposite value & update completedAt
-    case 'TOGGLE_TODO':
-      return state.map((item) => {
-        if (item.id === action.id) {
-          var completed = !item.completed;
-        
+      // add case for TOGGLE_TODO completed
+      // equal to opposite value & update completedAt
+    case 'UPDATE_TODO':
+      return state.map((todo) => {
+        if(todo.id === action.id) {
           return {
-            ...item,
-            completed: completed,
-            completedAt: completed ? moment().unix() : undefined
-          };
+            ...todo,
+            ...action.updates
+          }
+          // var nextCompleted = !todo.completed;
+
+          // return {
+          //   ...todo,
+          //   completed: nextCompleted,
+          //   completedAt: nextCompleted ? moment().unix() : undefined
+          // }
         } else {
-          return item;
+          return todo;
         }
       });
+      // The items below are my solution for this
+      // var updateTodos = state.map((todo) => {
+      //   if (todo.id === action.id) {
+      //     todo.completed = !todo.completed;
+      //     todo.completedAt = todo.completed ? moment().unix() : undefined;
+      //   }
+      //   return todo;
+      // });
+      // return [
+      //   ...state,
+      //   updatedTodos
+      // ];
     case 'ADD_TODOS':
       return [
         ...state,
@@ -56,4 +73,4 @@ export const todosReducer = (state = [], action) => {
     default:
       return state;
   }
-};
+}

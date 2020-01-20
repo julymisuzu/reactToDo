@@ -1,5 +1,5 @@
 import React from 'react';
-import Uuid from 'node-uuid';
+import uuid from 'node-uuid';
 import moment from 'moment';
 
 import TodoList from 'TodoList';

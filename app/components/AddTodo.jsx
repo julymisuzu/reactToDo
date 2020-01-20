@@ -1,17 +1,16 @@
 import React from 'react';
-const {connect} = require('react-redux');
-const actions = require('actions');
+import {connect} from 'react-redux';
+import * as actions from 'actions';
 
 export const AddTodo = React.createClass({
   handleSubmit: function (e) {
     e.preventDefault();
-
-    const {dispatch} = this.props;
+    var {dispatch} = this.props;
     var todoText = this.refs.todoText.value;
 
-    if(todoText.length > 0) {
+    if (todoText.length > 0) {
       this.refs.todoText.value = '';
-      dispatch(actions.addTodo(todoText));
+      dispatch(actions.startAddTodo(todoText));
     } else {
       this.refs.todoText.focus();
     }

@@ -1,18 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-const {Provider} = require('react-redux');
+import {Provider} from 'react-redux';
 import {Route, Router, IndexRoute, hashHistory} from 'react-router';
 
 import TodoApp from 'TodoApp';
 import TodoAPI from 'TodoAPI';
 
-const actions = require('actions');
-const reducers = require('reducers');
+import * as actions from 'actions';
 const store = require('configureStore').configure();
+
+// import '../playground/firebase/index';
 
 store.subscribe(() => {
   const state = store.getState();
-  console.log('New state', state);
+  console.log('New state', store.getState());
   TodoAPI.setTodos(state.todos);
 });
 
@@ -30,7 +31,7 @@ require('style!css!sass!applicationStyles')
 // The Provider allows that
 ReactDOM.render(
   <Provider store={store}>
-    <TodoApp />
+    <TodoApp/>
   </Provider>,
   document.getElementById('app')
 );
