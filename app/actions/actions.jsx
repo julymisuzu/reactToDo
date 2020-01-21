@@ -51,7 +51,20 @@ export const addTodos = (todos) => {
   };
 };
 
-// toggleTodo(id) TOGGLE_TODO
+export const startAddTodos = () => (dispatch, getState) => {
+  firebaseRef.child('todos').once('value', (snapshot) => {
+    var todosArray = snapshot.val() || {}
+    var allTodos = Object.keys(todosArray).map((item) => {
+      return {
+        id: item,
+        ...snapshot.val()[item]
+      }
+    });
+
+    dispatch(addTodos(allTodos));
+  });
+}
+
 export const updateTodo = (id, updates) => {
   return {
     type: 'UPDATE_TODO',

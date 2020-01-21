@@ -49,7 +49,7 @@ describe('Reducers', () => {
       expect(response[0]).toEqual(action.todo);
     });
 
-    it('should toggle todo', () => {
+    it('should update todo', () => {
       // to change the status of a todo item, we need to have a todo item
       // to change it's value. So we first set a start realistic value to the reducer.
       var todosArray = [{
@@ -59,14 +59,20 @@ describe('Reducers', () => {
         createdAt: moment().unix(),
         completedAt: undefined
       }];
+      var updates = {
+        completed: false,
+        completedAt: null
+      }
       var action = {
-        type: 'TOGGLE_TODO',
-        id: 0
+        type: 'UPDATE_TODO',
+        id: todosArray[0].id,
+        updates
       };
       var response = reducers.todosReducer(df(todosArray), df(action));
 
-      expect(response[0].completed).toEqual(true);
-      expect(response[0].completedAt).toNotBe(undefined);
+      expect(response[0].completed).toEqual(updates.completed);
+      expect(response[0].completedAt).toEqual(updates.completedAt);
+      expect(response[0].text).toEqual(todosArray[0].text);
     });
 
     it('should add existing todos', () => {
