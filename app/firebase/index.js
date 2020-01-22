@@ -5,7 +5,7 @@ try {
   var config = {
     apiKey: process.env.API_KEY,
     authDomain: process.env.AUTH_DOMAIN,
-    databaseURL:'https://todo-app-bd9d2.firebaseio.com',
+    databaseURL: process.env.DATABASE_URL,
     storageBucket: process.env.STORAGE_BUCKET
   };
 
