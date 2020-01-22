@@ -5,9 +5,11 @@ try {
   var config = {
     apiKey: process.env.API_KEY,
     authDomain: process.env.AUTH_DOMAIN,
-    databaseURL:process.env.DATABASE_URL,
+    databaseURL:'https://todo-app-bd9d2.firebaseio.com',
     storageBucket: process.env.STORAGE_BUCKET
   };
+
+  console.log('>>>>>>',config)
 
   firebase.initializeApp(config);
 } catch(e) {
