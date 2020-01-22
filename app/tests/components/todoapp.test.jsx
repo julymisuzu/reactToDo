@@ -8,7 +8,7 @@ import expect from 'expect';
 import * as configureStore from 'configureStore';
 import TodoList from 'TodoList';
 
-import TodoApp from 'TodoApp';
+import {TodoApp} from 'TodoApp';
 
 describe('TodoApp', () => {
   it('should exist', () => {
