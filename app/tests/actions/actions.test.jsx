@@ -34,24 +34,6 @@ describe('Actions', () => {
     expect(response).toEqual(action);
   });
 
-  // Testing ASYNC functions
-  it('should create todo and dispatch ADD_TODO', (done) => {
-    const store = createMockStore({});
-    const todoText = 'My todo item';
-
-    store.dispatch(actions.startAddTodo(todoText)).then(() => {
-      const actions = store.getActions();
-      expect(actions[0]).toInclude({
-        type: 'ADD_TODO'
-      });
-      expect(actions[0].todo).toInclude({
-        text: todoText
-      });
-      
-      done();
-    }).catch(done);
-  });
-
   it('should generate add todos action object', () => {
     var todos = [{
       id: '111',
@@ -91,9 +73,32 @@ describe('Actions', () => {
 
   describe('Tests with firebase todos', () => {
     var testTodoRef;
+    var uid;
+    var todosRef;
 
     beforeEach((done) => {
-      var todosRef = firebaseRef.child('todos');
+      firebase.auth().signInAnonymously()
+      .then((user) => {
+        uid = user.uid;
+        todosRef = firebaseRef.child(`users/${uid}/todos`);
+
+        return todosRef.remove();
+      }).then(() => {
+        testTodoRef = todosRef.push();
+
+        return testTodoRef.set({
+          text: 'Something todo',
+          completed: false,
+          createdAt: 123456
+        }).then(() => done()).catch(done);
+      });
+
+
+
+
+
+
+      /*var todosRef = firebaseRef.child('todos');
       
       todosRef.remove().then(() => {
         testTodoRef = firebaseRef.child('todos').push();
@@ -103,7 +108,7 @@ describe('Actions', () => {
           completed: false,
           createdAt: 123456
         })
-      }).then(() => done()).catch(done);
+      }).then(() => done()).catch(done);*/
       
     });
 
@@ -151,6 +156,24 @@ describe('Actions', () => {
 
         done();
       }, done)
+    });
+
+    // Testing ASYNC functions
+    it('should create todo and dispatch ADD_TODO', (done) => {
+      const store = createMockStore({});
+      const todoText = 'My todo item';
+
+      store.dispatch(actions.startAddTodo(todoText)).then(() => {
+        const actions = store.getActions();
+        expect(actions[0]).toInclude({
+          type: 'ADD_TODO'
+        });
+        expect(actions[0].todo).toInclude({
+          text: todoText
+        });
+        
+        done();
+      }).catch(done);
     });
   });
 
