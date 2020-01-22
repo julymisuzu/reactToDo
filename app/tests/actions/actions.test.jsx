@@ -94,6 +94,7 @@ describe('Actions', () => {
 
     beforeEach((done) => {
       var todosRef = firebaseRef.child('todos');
+      
       todosRef.remove().then(() => {
         testTodoRef = firebaseRef.child('todos').push();
 
@@ -139,7 +140,7 @@ describe('Actions', () => {
 
     it('should populate todos and dispatch ADD_TODOS', (done) => {
       const store = createMockStore({});
-      const action = actions.startAddTodo();
+      const action = actions.startAddTodos();
 
       store.dispatch(action).then(() => {
         const mockActions = store.getActions();
@@ -150,6 +151,27 @@ describe('Actions', () => {
 
         done();
       }, done)
+    });
+  });
+
+  describe('Tests with authentication', () => {
+    it('should login', () => {
+      var action = {
+        type: 'LOGIN',
+        uid: 123456
+      }
+      var response = actions.login(action.uid);
+
+      expect(response).toEqual(action);
+    });
+
+    it('should logout', () => {
+      var action = {
+        type: 'LOGOUT'
+      }
+      var response = actions.logout();
+
+      expect(response).toEqual(action);
     });
   });
 });

@@ -52,8 +52,9 @@ export const addTodos = (todos) => {
 };
 
 export const startAddTodos = () => (dispatch, getState) => {
-  firebaseRef.child('todos').once('value', (snapshot) => {
-    var todosArray = snapshot.val() || {}
+  var todosRef = firebaseRef.child('todos');
+  return todosRef.once('value', (snapshot) => {
+    var todosArray = snapshot.val() || {};  
     var allTodos = Object.keys(todosArray).map((item) => {
       return {
         id: item,
@@ -88,6 +89,13 @@ export const startToggleTodo = (id, completed) => {
   };
 };
 
+export const login = (userId) => {
+  return {
+    type: 'LOGIN',
+    uid: userId
+  }
+};
+
 export const startLogin = () => (dispatch, getState) => {
   return firebase.auth().signInWithPopup(githubProvider)
   .then((result) => {
@@ -95,6 +103,12 @@ export const startLogin = () => (dispatch, getState) => {
   }, (error) => {
     console.log('Unable to auth', error);
   });
+};
+
+export const logout = () => {
+  return {
+    type: 'LOGOUT'
+  };
 };
 
 export const startLogout = () => (dispatch, getState) => {
