@@ -1,7 +1,7 @@
 {
-  "name": "react-timer",
+  "name": "react-todo",
   "version": "1.0.0",
-  "description": "React Timer",
+  "description": "React Todo App",
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test karma start",
@@ -10,6 +10,10 @@
   },
   "author": "Juliana Flor",
   "license": "MIT",
+  "engines": {
+    "node": "8.10.0",
+    "npm": "5.6.0"
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "babel-core": "^6.5.1",
@@ -25,9 +29,11 @@
     "foundation-sites": "^6.5.1",
     "jquery": ">=3.0.0",
     "moment": "^2.12.0",
+    "node": "^13.6.0",
     "node-env-file": "^0.1.8",
     "node-sass": "^4.13.1",
     "node-uuid": "^1.4.8",
+    "npm": "^6.13.6",
     "react": "^0.14.7",
     "react-addons-test-utils": "^0.14.7",
     "react-dom": "^0.14.7",

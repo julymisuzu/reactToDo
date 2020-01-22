@@ -6,9 +6,9 @@ export const Login = React.createClass({
       <div>
         <h1 className="page-title">Todo App</h1>
 
-        <div className='row'>
-          <div className='columns small-centered small-10 medium-6 large-4'>
-            <div className='callout callout-auth'>
+        <div className="grid-x">
+          <div className="cell medium-6 large-4 large-offset-4 medium-offset-3">
+            <div className="grid-container container callout-auth">
               <h3>Login</h3>
               <p>
                 Login with GitHub account below.
