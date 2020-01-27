@@ -7,10 +7,12 @@ This folder should contains two files:
 - and another called test.env to keep the testing credentials.
 
 Both files should have the following variables:
+```
 API_KEY=
 AUTH_DOMAIN=
 DATABASE_URL=
 STORAGE_BUCKET=
+```
 
 # URL
 http://todo-app-94108.herokuapp.com/
