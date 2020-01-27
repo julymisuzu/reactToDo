@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-const actions = require('actions');
+import * as actions from 'actions';
 
 export const TodoSearch = React.createClass({
   render: function () {
@@ -10,13 +10,13 @@ export const TodoSearch = React.createClass({
       <div className="container__header">
         <div>
           <input type="search" ref="searchText" placeholder="Search todos" value={searchText} onChange={() => {
-            const searchText = this.refs.searchText.value;
+            let searchText = this.refs.searchText.value;
             dispatch(actions.setSearchText(searchText));
           }} />
         </div>
         <div className="container__header-completed">
           <label>
-            <input type="checkbox" ref="showCompleted" checked={showCompleted} onChange={()=> {
+            <input type="checkbox" ref="showCompleted" checked={showCompleted} onChange={() => {
               dispatch(actions.toggleShowCompleted());
             }} />
             Show completed todos

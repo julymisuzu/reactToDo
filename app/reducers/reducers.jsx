@@ -1,8 +1,8 @@
-import Uuid from 'node-uuid';
-import moment from 'moment';
+var uuid = require('node-uuid');
+var moment = require('moment');
 
-export const searchTextReducer = (state = '', action) => {
-  switch (action.type) {
+export var searchTextReducer = (state = '', action) => {
+  switch(action.type) {
     case 'SET_SEARCH_TEXT':
       return action.searchText;
     default:
@@ -10,42 +10,31 @@ export const searchTextReducer = (state = '', action) => {
   };
 };
 
-export const showCompletedReducer = (state = false, action) => {
-  switch (action.type) {
+export var showCompletedReducer = (state = false, action) => {
+  switch(action.type) {
     case 'TOGGLE_SHOW_COMPLETED':
       return !state;
     default:
       return state;
-  }
+  };
 };
 
-export const todosReducer = (state = [], action) => {
-  switch (action.type) {
+export var todosReducer = (state = [], action) => {
+  switch(action.type) {
     case 'ADD_TODO':
       return [
         ...state,
-        {
-          id: Uuid(),
-          text: action.text,
-          completed: false,
-          createdAt: moment().unix(),
-          completedAt: undefined
-        }
+        action.todo
       ];
-
-    // Add case for TOGGLE_TODO completed equal to opposite value & update completedAt
-    case 'TOGGLE_TODO':
-      return state.map((item) => {
-        if (item.id === action.id) {
-          var completed = !item.completed;
-        
+    case 'UPDATE_TODO':
+      return state.map((todo) => {
+        if(todo.id === action.id) {
           return {
-            ...item,
-            completed: completed,
-            completedAt: completed ? moment().unix() : undefined
-          };
+            ...todo,
+            ...action.updates
+          }
         } else {
-          return item;
+          return todo;
         }
       });
     case 'ADD_TODOS':
@@ -53,7 +42,23 @@ export const todosReducer = (state = [], action) => {
         ...state,
         ...action.todos
       ];
+    case 'LOGOUT':
+      return [];
     default:
       return state;
   }
 };
+
+export var authReducer = (state = '', action) => {
+  switch(action.type) {
+    case 'LOGIN':
+      return {
+        ...state,
+        uid: action.uid
+      };
+    case 'LOGOUT':
+      return {};
+    default:
+      return state;
+  }
+}
