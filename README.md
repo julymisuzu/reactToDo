@@ -1,5 +1,7 @@
 # React Todo
 
+This is a project created on the course [The Complete React Web App Developer Course](https://www.udemy.com/course/the-complete-react-web-app-developer-course/) on Udemy.
+
 # Config
 This project requires a /config folder inside the main folder containing the keys to link the site to the firebase database.
 This folder should contains two files:
