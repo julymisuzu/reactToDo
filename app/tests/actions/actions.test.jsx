@@ -122,7 +122,7 @@ describe('Actions', () => {
     // items text is equal to the text above
 
     it('should toggle todo and dispatch UPDATE_TODO action', (done) => {
-      const store = createMockStore({});
+      const store = createMockStore({auth: {uid}});
       const action = actions.startToggleTodo(testTodoRef.key, true);
 
       store.dispatch(action).then(() => {
@@ -144,7 +144,7 @@ describe('Actions', () => {
     });
 
     it('should populate todos and dispatch ADD_TODOS', (done) => {
-      const store = createMockStore({});
+      const store = createMockStore({auth: {uid}});
       const action = actions.startAddTodos();
 
       store.dispatch(action).then(() => {
@@ -160,7 +160,7 @@ describe('Actions', () => {
 
     // Testing ASYNC functions
     it('should create todo and dispatch ADD_TODO', (done) => {
-      const store = createMockStore({});
+      const store = createMockStore({auth: {uid}});
       const todoText = 'My todo item';
 
       store.dispatch(actions.startAddTodo(todoText)).then(() => {
