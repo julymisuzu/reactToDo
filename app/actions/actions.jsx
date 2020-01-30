@@ -54,10 +54,10 @@ export const addTodos = (todos) => {
 
 export const startAddTodos = () => (dispatch, getState) => {
   const uid = getState().auth.uid;
-  var todosRef = firebaseRef.child(`users/${uid}/todos`);
+  const todosRef = firebaseRef.child(`users/${uid}/todos`);
   return todosRef.once('value', (snapshot) => {
-    var todosArray = snapshot.val() || {};  
-    var allTodos = Object.keys(todosArray).map((item) => {
+    const todosArray = snapshot.val() || {};  
+    const allTodos = Object.keys(todosArray).map((item) => {
       return {
         id: item,
         ...snapshot.val()[item]

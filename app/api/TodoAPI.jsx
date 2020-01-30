@@ -1,5 +1,3 @@
-import $ from 'jquery';
-
 module.exports = {
   filterTodos: function (todos, showCompleted, searchText) {
     let filteredTodos = todos;
@@ -12,7 +10,7 @@ module.exports = {
     // Filter by searchText
     filteredTodos = filteredTodos.filter((item) => {
       let text = item.text.toLowerCase();
-      return searchText.length === 0 || text.indexOf(searchText) > -1;
+      return searchText.length === 0 || text.indexOf(searchText.toLowerCase()) > -1;
     });
 
     // Sort todos with non-completed first

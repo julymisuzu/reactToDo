@@ -1,9 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
+
+// Actions
 import * as actions from 'actions';
 
-export const TodoSearch = React.createClass({
-  render: function () {
+export class TodoSearch extends React.Component {
+  render() {
     const {dispatch, showCompleted, searchText} = this.props;
 
     return (
@@ -25,7 +27,7 @@ export const TodoSearch = React.createClass({
       </div>
     );
   }
-});
+};
 
 export default connect(
   (state) => {

@@ -18,7 +18,7 @@ describe('TodoAPI', () => {
       completed: true
     }, {
       id: 2,
-      text: 'Text 2',
+      text: 'text 2',
       completed: true
     }, {
       id: 3,
@@ -46,6 +46,11 @@ describe('TodoAPI', () => {
 
     it('should filter todos by searchText', () => {
       var filteredTodos = TodoAPI.filterTodos(todos, true, 'text');
+      expect(filteredTodos.length).toBe(2);
+    });
+
+    it('should filter todos by searchText if uppercase', () => {
+      var filteredTodos = TodoAPI.filterTodos(todos, true, 'Text');
       expect(filteredTodos.length).toBe(2);
     });
 
